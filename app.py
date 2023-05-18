@@ -87,7 +87,7 @@ def yolo(path , project):
         print(file , data)
     
     source_dir = path
-    dest_dir  = "D:\\ai tool\\data" + "\\" + project 
+    dest_dir  = "D:\\ai tool\\static\\data" + "\\" + project 
     os.makedirs(dest_dir, exist_ok=True)
 
     for filename in os.listdir(source_dir):
@@ -97,10 +97,17 @@ def yolo(path , project):
 
     return render_template('yolo.html', results=results , path=path, project=project)
 
+@app.route('/tool')
+def tool():
+    images = ['static\\data\\new\\cat.jpg' , 'static\\data\\new\\dog.jpg']
+    # images = ['static/data/new/cat.jpg']
+
+    return render_template('tool.html' , images=images)
+
 
 
 @app.route('/data')
-def show_projects():
+def show_data():
     projects = Project.query.all()
 
     print(projects)
@@ -122,11 +129,11 @@ def project():
         if existing_project:
             flash('Project already exists', "error_msg")
             return redirect(url_for('project'))
-
-
+        
         return redirect(url_for('yolo', path=path , project=project))
-    
-    return render_template('project.html', form=form)
+
+    pro = Project.query.all()
+    return render_template('project.html', form=form , pro=pro)
 
 
 

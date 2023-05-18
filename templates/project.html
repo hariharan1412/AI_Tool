@@ -18,7 +18,22 @@
         {{ form.project.label }} {{ form.project }}
         {{ form.submit }}
     </form>
-    
+
+    <div style="margin:10px">
+        {% for project in pro %}
+        
+        <div class="card">
+            <h5 class="card-header">{{ project.name }}</h5>
+            <div class="card-body">
+                
+                <h5 class="card-title">No.of.Files : {{ project.files|length }} </h5>
+                <a href="{{url_for('tool')}}" class="btn btn-primary"> Tool </a>
+            </div>
+        </div>
+        
+        {% endfor %}
+    </div>
+        
 </div>
 
 {% endblock %}
