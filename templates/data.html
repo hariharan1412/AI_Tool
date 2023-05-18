@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+    {% block body %}
+    
+
+	<h1>Project Data</h1>
+	
+
+	<table class="table">
+		
+		<thead>
+		  <tr class="table-primary">
+			<th scope="col">Project </th>
+			<th scope="col">File </th>
+			<th scope="col">Vlaue </th>
+		  </tr>
+		</thead>
+
+
+		<tbody class="table-info">
+
+			{% for project in projects %}
+
+			{% for file in project.files %}
+				{% for row in file.rows %}
+					<tr>
+						{% if loop.index0 == 0 %}
+							<td rowspan="{{ file.rows|length }}">{{ project.name }}</td>
+							<td rowspan="{{ file.rows|length }}">{{ file.name }}</td>
+						{% endif %}
+						<td>{{ row.content }}</td>
+					</tr>
+				{% endfor %}
+			{% endfor %}
+		{% endfor %}
+			
+	</table>
+	
+    {% endblock %}
+
